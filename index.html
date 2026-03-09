@@ -135,35 +135,37 @@
         <button type="submit" id="submitBtn">Enviar Checkpoint</button>
     </form>
 </div>
-
 <script>
-    const scriptURL = 'https://script.google.com/a/macros/ifood.com.br/s/AKfycby_c7k0_KAX7-vK90selOcfz0VrzHwtCFYavhRQ6zgOQKcGww9R3mghra0C_EcypE7xpQ/exec';
-    const form = document.getElementById('healthForm');
+    const scriptURL = 'https://script.google.com/a/macros/ifood.com.br/s/AKfycby_c7k0_KAX7-vK90selOcfz0VrzHwtCFYavhRQ6zgOQKcGww9R3mghra0C_EcypE7xpQ/exec'; // Verifique se o link está correto
+    const form = document.getElementById('health_form');
 
     form.addEventListener('submit', e => {
         e.preventDefault();
-        document.getElementById('submitBtn').disabled = true;
-        document.getElementById('submitBtn').innerText = "Enviando...";
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Enviando...";
 
-       fetch(scriptURL, { 
-    method: 'POST', 
-    body: new FormData(form),
-    mode: 'no-cors' // Isso ajuda a "pular" o bloqueio de segurança do navegador
-})
-            .then(response => {
-                alert("Dados enviados com sucesso!");
-                form.reset();
-                document.getElementById('submitBtn').disabled = false;
-                document.getElementById('submitBtn').innerText = "Enviar Checkpoint";
-            })
-            .catch(error => {
-                console.error('Erro!', error.message);
-                alert("Erro ao enviar. Tente novamente.");
-            });
+        // Usamos mode: 'no-cors' para permitir o envio para domínios restritos
+        fetch(scriptURL, { 
+            method: 'POST', 
+            mode: 'no-cors', 
+            body: new FormData(form)
+        })
+        .then(() => {
+            alert("Dados enviados com sucesso! Verifique a planilha.");
+            form.reset();
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Enviar Checkpoint";
+        })
+        .catch(error => {
+            console.error('Erro!', error.message);
+            alert("Ocorreu um erro no envio.");
+            submitBtn.disabled = false;
+        });
     });
 </script>
-
 </body>
 
 </html>
+
 
