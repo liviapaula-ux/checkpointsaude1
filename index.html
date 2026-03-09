@@ -145,7 +145,11 @@
         document.getElementById('submitBtn').disabled = true;
         document.getElementById('submitBtn').innerText = "Enviando...";
 
-        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+       fetch(scriptURL, { 
+    method: 'POST', 
+    body: new FormData(form),
+    mode: 'no-cors' // Isso ajuda a "pular" o bloqueio de segurança do navegador
+})
             .then(response => {
                 alert("Dados enviados com sucesso!");
                 form.reset();
@@ -162,3 +166,4 @@
 </body>
 
 </html>
+
