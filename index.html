@@ -12,9 +12,10 @@
         label { display: block; margin-top: 10px; font-weight: bold; }
         input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
         .checkbox-group { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; }
-        .checkbox-group label { font-weight: normal; }
+        .checkbox-group label { font-weight: normal; margin-top: 5px; }
         button { background: #3498db; color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; width: 100%; font-size: 16px; margin-top: 20px; }
         button:hover { background: #2980b9; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
     </style>
 </head>
 <body>
@@ -70,7 +71,7 @@
         </div>
 
         <div class="section">
-            <label>Histórico Clínico (Sim/Não):</label>
+            <label>Histórico Clínico:</label>
             <div class="checkbox-group">
                 <label><input type="checkbox" name="planejada" value="Sim"> Planejada?</label>
                 <label><input type="checkbox" name="aborto" value="Sim"> Já teve aborto?</label>
@@ -114,7 +115,7 @@
                 <option value="Sim">Sim</option><option value="Não">Não</option>
             </select>
 
-            <label>Iniciou medicações/vitaminas (Ácido fólico, etc)?</label>
+            <label>Iniciou medicações/vitaminas?</label>
             <select name="vitaminas">
                 <option value="Sim">Sim</option><option value="Não">Não</option>
             </select>
@@ -134,11 +135,11 @@
 
         <button type="submit" id="submitBtn">Enviar Checkpoint</button>
     </form>
-</body>
-</html>
+</div>
 
 <script>
-  const scriptURL = 'https://script.google.com/a/macros/ifood.com.br/s/AKfycby_c7k0_KAX7-vK90selOcfz0VrzHwtCFYavhRQ6zgOQKcGww9R3mghra0C_EcypE7xpQ/exec'; // O link /exec
+  // URL da sua implantação (certifique-se de que é a versão mais recente)
+  const scriptURL = 'https://script.google.com/a/macros/ifood.com.br/s/AKfycby_c7k0_KAX7-vK90selOcfz0VrzHwtCFYavhRQ6zgOQKcGww9R3mghra0C_EcypE7xpQ/exec';
   const form = document.getElementById('healthForm');
 
   form.addEventListener('submit', e => {
@@ -147,13 +148,10 @@
     submitBtn.disabled = true;
     submitBtn.innerText = "Enviando...";
 
-    // Criamos um objeto com os dados do formulário
     const formData = new FormData(form);
-    
-    // Transformamos em uma URL amigável para o Google
     const queryString = new URLSearchParams(formData).toString();
 
-    // Enviamos usando uma técnica que ignora o bloqueio de domínio (CORS)
+    // Técnica de envio via POST com parâmetros na URL para evitar bloqueios de CORS em contas corporativas
     fetch(`${scriptURL}?${queryString}`, {
       method: 'POST',
       mode: 'no-cors' 
@@ -165,9 +163,13 @@
         submitBtn.innerText = "Enviar Checkpoint";
     })
     .catch(error => {
-        alert("Erro ao enviar. Tente novamente.");
+        console.error('Erro!', error.message);
+        alert("Ocorreu um erro ao enviar. Tente novamente.");
         submitBtn.disabled = false;
+        submitBtn.innerText = "Enviar Checkpoint";
     });
   });
 </script>
 
+</body>
+</html>
