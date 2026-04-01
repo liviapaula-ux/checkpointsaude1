@@ -164,14 +164,17 @@ button:hover {
 <button type="submit">Enviar</button>
 
 </form>
-</div>
 
 <script>
-document.getElementById('gestanteForm').addEventListener('submit', async function(e) {
+const form = document.getElementById('gestanteForm');
+
+form.addEventListener('submit', async function(e) {
   e.preventDefault();
 
-  const formData = new FormData(this);
+  const formData = new FormData(form);
   const data = Object.fromEntries(formData.entries());
+
+  console.log('enviando', data);
 
   try {
     const response = await fetch('/api/save', {
@@ -184,14 +187,10 @@ document.getElementById('gestanteForm').addEventListener('submit', async functio
 
     const result = await response.json();
 
-    if (response.ok) {
-      alert('Dados enviados com sucesso!');
-      this.reset();
-      console.log(result);
-    } else {
-      alert('Erro ao enviar');
-      console.log(result);
-    }
+    console.log(result);
+
+    alert('Dados enviados com sucesso!');
+    form.reset();
 
   } catch (error) {
     console.error(error);
