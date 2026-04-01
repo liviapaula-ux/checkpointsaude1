@@ -1,41 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkpoint Saúde Gestante</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f9fc;
+    margin: 0;
+    padding: 40px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+h1 {
+    text-align: center;
+    color: #4f46e5;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+textarea {
+    min-height: 80px;
+}
+
+button {
+    margin-top: 30px;
+    width: 100%;
+    padding: 14px;
+    background: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #4338ca;
+}
+
+.full {
+    grid-column: span 2;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>Checkpoint Saúde Gestante</h1>
+
+<form id="gestanteForm">
+
+<div class="grid">
+
+<div>
+<label>Nome</label>
+<input type="text" name="nome" required>
+</div>
+
+<div>
+<label>Email</label>
+<input type="email" name="email">
+</div>
+
+<div>
+<label>Peso</label>
+<input type="text" name="peso">
+</div>
+
+<div>
+<label>Altura</label>
+<input type="text" name="altura">
+</div>
+
+<div>
+<label>Estado Civil</label>
+<input type="text" name="estadoCivil">
+</div>
+
+<div>
+<label>DPP</label>
+<input type="date" name="dpp">
+</div>
+
+<div>
+<label>DUM</label>
+<input type="date" name="dum">
+</div>
+
+<div>
+<label>Idade Gestacional</label>
+<input type="text" name="idadeGestacional">
+</div>
+
+<div>
+<label>Primeira Gestação?</label>
+<select name="primeiraGestacao">
+<option>Sim</option>
+<option>Não</option>
+</select>
+</div>
+
+<div>
+<label>Tipo de Gestação</label>
+<input type="text" name="tipoGestacao">
+</div>
+
+<div>
+<label>Tipo de Concepção</label>
+<input type="text" name="tipoConcepcao">
+</div>
+
+<div>
+<label>Gestação Planejada?</label>
+<select name="planejada">
+<option>Sim</option>
+<option>Não</option>
+</select>
+</div>
+
+<div>
+<label>Histórico de Aborto?</label>
+<select name="aborto">
+<option>Sim</option>
+<option>Não</option>
+</select>
+</div>
+
+<div>
+<label>Parto Prematuro?</label>
+<select name="partoPrematuro">
+<option>Sim</option>
+<option>Não</option>
+</select>
+</div>
+
+<div>
+<label>Má Formação?</label>
+<select name="maFormacao">
+<option>Sim</option>
+<option>Não</option>
+</select>
+</div>
+
+<div>
+<label>Óbito Fetal?</label>
+<select name="obitoFetal">
+<option>Sim</option>
+<option>Não</option>
+</select>
+</div>
+
+<div>
+<label>Tipo Sanguíneo</label>
+<input type="text" name="tipoSanguineo">
+</div>
+
+<div class="full">
+<label>Histórico Clínico</label>
+<textarea name="historicoClinico"></textarea>
+</div>
+
+<div class="full">
+<label>Diagnósticos</label>
+<textarea name="diagnosticos"></textarea>
+</div>
+
+<div class="full">
+<label>Exames</label>
+<textarea name="exames"></textarea>
+</div>
+
+<div class="full">
+<label>Alterações nos Exames</label>
+<textarea name="alteracaoExames"></textarea>
+</div>
+
+<div class="full">
+<label>Medicamentos</label>
+<textarea name="medicamentos"></textarea>
+</div>
+
+<div>
+<label>Translucência Nucal</label>
+<input type="text" name="translucencia">
+</div>
+
+<div>
+<label>Vitaminas</label>
+<input type="text" name="vitaminas">
+</div>
+
+<div class="full">
+<label>Intercorrências</label>
+<textarea name="intercorrencias"></textarea>
+</div>
+
+<div>
+<label>Aceita contato?</label>
+<select name="aceitaContato">
+<option>Sim</option>
+<option>Não</option>
+</select>
+</div>
+
+</div>
+
+<button type="submit">Enviar</button>
+
+</form>
+</div>
+
+<script>
 const scriptURL = 'https://script.google.com/a/macros/ifood.com.br/s/AKfycby-H95vstybCskfJ21JH0YIf7N4pQPBPSCLsvkvUxAORGgHon27zhCNJTnUplBAeJI/exec';
 
-document.querySelector("form").addEventListener("submit", async function(e) {
-  e.preventDefault();
+document.getElementById('gestanteForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-  const formData = {
-    nome: document.querySelector('[name="nome"]').value,
-    email: document.querySelector('[name="email"]').value,
-    peso: document.querySelector('[name="peso"]').value,
-    altura: document.querySelector('[name="altura"]').value,
-    estadoCivil: document.querySelector('[name="estadoCivil"]').value,
-    dpp: document.querySelector('[name="dpp"]').value,
-    dum: document.querySelector('[name="dum"]').value,
-    idadeGestacional: document.querySelector('[name="idadeGestacional"]').value,
-    primeiraGestacao: document.querySelector('[name="primeiraGestacao"]').value,
-    historicoClinico: document.querySelector('[name="historicoClinico"]').value,
-    tipoGestacao: document.querySelector('[name="tipoGestacao"]').value,
-    tipoConcepcao: document.querySelector('[name="tipoConcepcao"]').value,
-    planejada: document.querySelector('[name="planejada"]').value,
-    aborto: document.querySelector('[name="aborto"]').value,
-    partoPrematuro: document.querySelector('[name="partoPrematuro"]').value,
-    maFormacao: document.querySelector('[name="maFormacao"]').value,
-    obitoFetal: document.querySelector('[name="obitoFetal"]').value,
-    tipoSanguineo: document.querySelector('[name="tipoSanguineo"]').value,
-    diagnosticos: document.querySelector('[name="diagnosticos"]').value,
-    exames: document.querySelector('[name="exames"]').value,
-    alteracaoExames: document.querySelector('[name="alteracaoExames"]').value,
-    medicamentos: document.querySelector('[name="medicamentos"]').value,
-    translucencia: document.querySelector('[name="translucencia"]').value,
-    vitaminas: document.querySelector('[name="vitaminas"]').value,
-    intercorrencias: document.querySelector('[name="intercorrencias"]').value,
-    aceitaContato: document.querySelector('[name="aceitaContato"]').value
-  };
+    const form = new FormData(this);
 
-  await fetch(scriptURL, {
-    method: 'POST',
-    body: JSON.stringify(formData)
-  });
+    const data = Object.fromEntries(form.entries());
 
-  alert("Dados enviados com sucesso!");
+    try {
+        await fetch(scriptURL, {
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
+
+        alert('Dados enviados com sucesso!');
+        this.reset();
+
+    } catch (error) {
+        alert('Erro ao enviar dados.');
+        console.error(error);
+    }
 });
+</script>
+
+</body>
+</html>
