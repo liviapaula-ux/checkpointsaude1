@@ -166,6 +166,7 @@ button:hover {
 </form>
 
 <script>
+<script>
 const form = document.getElementById('gestanteForm');
 
 form.addEventListener('submit', async function(e) {
@@ -173,8 +174,6 @@ form.addEventListener('submit', async function(e) {
 
   const formData = new FormData(form);
   const data = Object.fromEntries(formData.entries());
-
-  console.log('enviando', data);
 
   try {
     const response = await fetch('/api/save', {
@@ -189,8 +188,12 @@ form.addEventListener('submit', async function(e) {
 
     console.log(result);
 
-    alert('Dados enviados com sucesso!');
-    form.reset();
+    if (result.success) {
+      alert('Dados enviados com sucesso!');
+      form.reset();
+    } else {
+      alert('Erro ao enviar');
+    }
 
   } catch (error) {
     console.error(error);
