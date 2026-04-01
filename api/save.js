@@ -4,11 +4,16 @@ export default async function handler(req, res) {
   }
 
   try {
-    const data = req.body;
-    const params = new URLSearchParams(data).toString();
+    const data = req.body || {};
+
+    const params = new URLSearchParams();
+
+    Object.keys(data).forEach(key => {
+      params.append(key, data[key] || '');
+    });
 
     const scriptURL =
-      'https://script.google.com/macros/s/AKfycbwxxKwC6QorFSKIjSGjRXprfXMaTHw8cL2WiRnr0vNgG5FR1PWYBfdW5mbLuTy5cU5g/exec?' + params;
+      'https://script.google.com/macros/s/AKfycbwxxKwC6QorFSKIjSGjRXprfXMaTHw8cL2WiRnr0vNgG5FR1PWYBfdW5mbLuTy5cU5g/exec?' + params.toString();
 
     const response = await fetch(scriptURL);
     const text = await response.text();
