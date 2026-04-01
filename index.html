@@ -6,41 +6,31 @@
 <title>Checkpoint Saúde Gestante</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
-
 body {
   font-family: Arial, sans-serif;
-  background: #f7f9fc;
+  background: #f5f7fb;
   margin: 0;
   padding: 40px;
 }
 
 .container {
-  max-width: 950px;
+  max-width: 1000px;
   margin: auto;
   background: white;
-  padding: 32px;
-  border-radius: 18px;
+  padding: 30px;
+  border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
-
-h1 {
-  text-align: center;
-  color: #4f46e5;
-  margin-bottom: 30px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2,1fr);
   gap: 20px;
 }
 
 label {
-  display: block;
   font-weight: bold;
+  display: block;
   margin-bottom: 8px;
 }
 
@@ -48,12 +38,11 @@ input, select, textarea {
   width: 100%;
   padding: 12px;
   border-radius: 10px;
-  border: 1px solid #d1d5db;
-  font-size: 14px;
+  border: 1px solid #ccc;
 }
 
 textarea {
-  min-height: 90px;
+  min-height: 100px;
 }
 
 .full {
@@ -62,18 +51,13 @@ textarea {
 
 button {
   width: 100%;
-  margin-top: 30px;
   padding: 14px;
-  border: none;
-  border-radius: 12px;
+  margin-top: 30px;
   background: #4f46e5;
   color: white;
-  font-size: 16px;
+  border: none;
+  border-radius: 12px;
   cursor: pointer;
-}
-
-button:hover {
-  background: #4338ca;
 }
 </style>
 </head>
@@ -164,23 +148,18 @@ button:hover {
 <button type="submit">Enviar</button>
 
 </form>
+</div>
 
 <script>
-<script>
-const form = document.getElementById('gestanteForm');
-
-form.addEventListener('submit', async function(e) {
+document.getElementById('gestanteForm').addEventListener('submit', async function(e) {
   e.preventDefault();
 
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
+  const data = Object.fromEntries(new FormData(this).entries());
 
   try {
     const response = await fetch('/api/save', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
 
@@ -190,16 +169,17 @@ form.addEventListener('submit', async function(e) {
 
     if (result.success) {
       alert('Dados enviados com sucesso!');
-      form.reset();
+      this.reset();
     } else {
       alert('Erro ao enviar');
     }
 
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
     alert('Erro ao enviar');
   }
 });
 </script>
+
 </body>
 </html>
