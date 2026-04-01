@@ -1,23 +1,168 @@
-<script>
-document.getElementById('gestanteForm').addEventListener('submit', function(e) {
-  e.preventDefault();
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkpoint Saúde Gestante</title>
 
-  const data = Object.fromEntries(new FormData(this).entries());
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f7fb;
+  margin: 0;
+  padding: 40px;
+}
 
-  const url =
-    'https://script.google.com/macros/s/AKfycbwxxKwC6QorFSKIjSGjRXprfXMaTHw8cL2WiRnr0vNgG5FR1PWYBfdW5mbLuTy5cU5g/exec?' +
-    new URLSearchParams(data).toString();
+.container {
+  max-width: 1000px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
 
-  fetch(url)
-    .then(response => response.text())
-    .then(result => {
-      console.log(result);
-      alert('Dados enviados com sucesso!');
-      document.getElementById('gestanteForm').reset();
-    })
-    .catch(error => {
-      console.error(error);
-      alert('Erro ao enviar');
-    });
-});
-</script>
+h1 {
+  text-align: center;
+  color: #4f46e5;
+  margin-bottom: 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 20px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+.full {
+  grid-column: span 2;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 30px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background: #4338ca;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>Checkpoint Saúde Gestante</h1>
+
+<form
+action="https://script.google.com/macros/s/AKfycbwxxKwC6QorFSKIjSGjRXprfXMaTHw8cL2WiRnr0vNgG5FR1PWYBfdW5mbLuTy5cU5g/exec"
+method="GET"
+target="_blank">
+
+<div class="grid">
+
+<div>
+<label>Nome</label>
+<input type="text" name="nome" required>
+</div>
+
+<div>
+<label>Email</label>
+<input type="email" name="email">
+</div>
+
+<div>
+<label>Peso</label>
+<input type="text" name="peso">
+</div>
+
+<div>
+<label>Altura</label>
+<input type="text" name="altura">
+</div>
+
+<div>
+<label>Estado Civil</label>
+<input type="text" name="estadoCivil">
+</div>
+
+<div>
+<label>DPP</label>
+<input type="date" name="dpp">
+</div>
+
+<div>
+<label>DUM</label>
+<input type="date" name="dum">
+</div>
+
+<div>
+<label>Idade Gestacional</label>
+<input type="text" name="idadeGestacional">
+</div>
+
+<div>
+<label>Primeira Gestação?</label>
+<select name="primeiraGestacao">
+<option>Sim</option>
+<option>Não</option>
+</select>
+</div>
+
+<div>
+<label>Tipo de Gestação</label>
+<input type="text" name="tipoGestacao">
+</div>
+
+<div class="full">
+<label>Histórico Clínico</label>
+<textarea name="historicoClinico"></textarea>
+</div>
+
+<div class="full">
+<label>Diagnósticos</label>
+<textarea name="diagnosticos"></textarea>
+</div>
+
+<div class="full">
+<label>Medicamentos</label>
+<textarea name="medicamentos"></textarea>
+</div>
+
+<div class="full">
+<label>Intercorrências</label>
+<textarea name="intercorrencias"></textarea>
+</div>
+
+</div>
+
+<button type="submit">Enviar</button>
+
+</form>
+</div>
+
+</body>
+</html>
