@@ -1,337 +1,41 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checkpoint de Saúde</title>
-
-<style>
-
-body {
-font-family: sans-serif;
-background: #f4f7f6;
-padding: 20px;
-color: #333;
-}
-
-.container {
-max-width: 600px;
-background: white;
-padding: 30px;
-border-radius: 8px;
-margin: auto;
-box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-h2 {
-color: #2c3e50;
-border-bottom: 2px solid #3498db;
-padding-bottom: 10px;
-}
-
-.section {
-margin-bottom: 20px;
-padding: 15px;
-border: 1px solid #eee;
-border-radius: 5px;
-}
-
-label {
-display: block;
-margin-top: 10px;
-font-weight: bold;
-}
-
-input, select, textarea {
-width: 100%;
-padding: 8px;
-margin-top: 5px;
-border: 1px solid #ccc;
-border-radius: 4px;
-box-sizing: border-box;
-}
-
-.checkbox-group {
-margin-top: 10px;
-display: grid;
-grid-template-columns: 1fr 1fr;
-}
-
-.checkbox-group label {
-font-weight: normal;
-margin-top: 5px;
-}
-
-button {
-background: #3498db;
-color: white;
-border: none;
-padding: 12px 20px;
-border-radius: 5px;
-cursor: pointer;
-width: 100%;
-font-size: 16px;
-margin-top: 20px;
-}
-
-button:hover {
-background: #2980b9;
-}
-
-button:disabled {
-background: #ccc;
-cursor: not-allowed;
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<h2>Checkpoint de Saúde</h2>
-
-<form id="healthForm">
-
-<div class="section">
-
-<label>Nome:</label>
-<input type="text" name="nome" required>
-
-<label>Email:</label>
-<input type="email" name="email" required>
-
-</div>
-
-<div class="section">
-
-<label>Peso (kg):</label>
-<input type="text" name="peso" placeholder="Ex: 70kg" required>
-
-<label>Altura (cm):</label>
-<input type="text" name="altura" placeholder="Ex: 165cm" required>
-
-<label>Estado Civil:</label>
-<input type="text" name="estado_civil">
-
-</div>
-
-<div class="section">
-
-<label>Data prevista do parto:</label>
-<input type="date" name="data_parto">
-
-<label>Data da última menstruação (DUM):</label>
-<input type="date" name="dum">
-
-<label>Idade gestacional (semanas):</label>
-<input type="number" name="idade_gestacional">
-
-</div>
-
-<div class="section">
-
-<label>1ª gestação?</label>
-
-<select name="primeira_gestacao">
-<option value="Sim">Sim</option>
-<option value="Não">Não</option>
-</select>
-
-<label>Se não, quantas anteriores e complicações?</label>
-
-<textarea name="gestacoes_anteriores" rows="2"></textarea>
-
-</div>
-
-<div class="section">
-
-<label>Tipo de Gestação:</label>
-
-<select name="tipo_gestacao">
-<option value="Unica">Única</option>
-<option value="Gemelar">Gemelar</option>
-<option value="Trigemelar">Trigemelar</option>
-</select>
-
-<label>Tipo de concepção:</label>
-
-<select name="concepcao">
-<option value="Natural">Natural</option>
-<option value="FIV">FIV</option>
-</select>
-
-</div>
-
-<div class="section">
-
-<label>Histórico Clínico:</label>
-
-<div class="checkbox-group">
-
-<label><input type="checkbox" name="planejada" value="Sim"> Planejada?</label>
-
-<label><input type="checkbox" name="aborto" value="Sim"> Já teve aborto?</label>
-
-<label><input type="checkbox" name="prematuro" value="Sim"> Parto prematuro?</label>
-
-<label><input type="checkbox" name="ma_formacao" value="Sim"> Má-formação?</label>
-
-<label><input type="checkbox" name="obito" value="Sim"> Óbito fetal?</label>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<label>Tipo sanguíneo da mãe:</label>
-
-<select name="tipo_sangue">
-
-<option value="A+">A +</option>
-<option value="A-">A -</option>
-
-<option value="B+">B +</option>
-<option value="B-">B -</option>
-
-<option value="AB+">AB +</option>
-<option value="AB-">AB -</option>
-
-<option value="O+">O +</option>
-<option value="O-">O -</option>
-
-<option value="Nao sei">Não sei</option>
-
-</select>
-
-</div>
-
-<div class="section">
-
-<label>Diagnósticos ANTES da gestação:</label>
-
-<textarea name="diagnosticos_previos"
-placeholder="Diabetes, Hipertensão, Obesidade, etc."></textarea>
-
-</div>
-
-<div class="section">
-
-<label>Exames realizados (HIV, VDRL, Toxoplasmose, Hep B, Urina):</label>
-
-<input type="text" name="exames" placeholder="Quais já fez?">
-
-<label>Algum apresentou alteração?</label>
-
-<input type="text" name="alteracoes_exames">
-
-</div>
-
-<div class="section">
-
-<label>Medicamentos contínuos, Álcool ou Tabaco:</label>
-
-<textarea name="remedios"
-placeholder="Remédios e substâncias..."></textarea>
-
-</div>
-
-<div class="section">
-
-<label>Já fez Translucência Nucal?</label>
-
-<select name="ultrassom">
-<option value="Sim">Sim</option>
-<option value="Não">Não</option>
-</select>
-
-<label>Iniciou medicações/vitaminas?</label>
-
-<select name="vitaminas">
-<option value="Sim">Sim</option>
-<option value="Não">Não</option>
-</select>
-
-</div>
-
-<div class="section">
-
-<label>Intercorrências (Internação ou Sangramento):</label>
-
-<input type="text" name="sangramento"
-placeholder="Descreva se houve">
-
-</div>
-
-<div class="section">
-
-<label>Aceita contato do time de Saúde?</label>
-
-<select name="contato_saude">
-<option value="Sim">Sim</option>
-<option value="Não">Não</option>
-</select>
-
-</div>
-
-<button type="submit" id="submitBtn">
-Enviar Checkpoint
-</button>
-
-</form>
-
-</div>
-
-<script>
-
-const scriptURL = "https://script.google.com/a/macros/ifood.com.br/s/AKfycby_c7k0_KAX7-vK90selOcfz0VrzHwtCFYavhRQ6zgOQKcGww9R3mghra0C_EcypE7xpQ/exec";
-
-const form = document.getElementById("healthForm");
-
-form.addEventListener("submit", e => {
-
-e.preventDefault();
-
-const submitBtn = document.getElementById("submitBtn");
-
-submitBtn.disabled = true;
-
-submitBtn.innerText = "Enviando...";
-
-fetch(scriptURL, {
-method: "POST",
-body: new FormData(form)
-})
-
-.then(response => {
-
-alert("Checkpoint enviado com sucesso! Em 5 dias, nosso time de enfermagem entrará em contato.");
-
-form.reset();
-
-})
-
-.catch(error => {
-
-alert("Erro ao enviar.");
-
-console.error(error);
-
-})
-
-.finally(() => {
-
-submitBtn.disabled = false;
-
-submitBtn.innerText = "Enviar Checkpoint";
-
+const scriptURL = 'https://script.google.com/a/macros/ifood.com.br/s/AKfycby-H95vstybCskfJ21JH0YIf7N4pQPBPSCLsvkvUxAORGgHon27zhCNJTnUplBAeJI/exec';
+
+document.querySelector("form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const formData = {
+    nome: document.querySelector('[name="nome"]').value,
+    email: document.querySelector('[name="email"]').value,
+    peso: document.querySelector('[name="peso"]').value,
+    altura: document.querySelector('[name="altura"]').value,
+    estadoCivil: document.querySelector('[name="estadoCivil"]').value,
+    dpp: document.querySelector('[name="dpp"]').value,
+    dum: document.querySelector('[name="dum"]').value,
+    idadeGestacional: document.querySelector('[name="idadeGestacional"]').value,
+    primeiraGestacao: document.querySelector('[name="primeiraGestacao"]').value,
+    historicoClinico: document.querySelector('[name="historicoClinico"]').value,
+    tipoGestacao: document.querySelector('[name="tipoGestacao"]').value,
+    tipoConcepcao: document.querySelector('[name="tipoConcepcao"]').value,
+    planejada: document.querySelector('[name="planejada"]').value,
+    aborto: document.querySelector('[name="aborto"]').value,
+    partoPrematuro: document.querySelector('[name="partoPrematuro"]').value,
+    maFormacao: document.querySelector('[name="maFormacao"]').value,
+    obitoFetal: document.querySelector('[name="obitoFetal"]').value,
+    tipoSanguineo: document.querySelector('[name="tipoSanguineo"]').value,
+    diagnosticos: document.querySelector('[name="diagnosticos"]').value,
+    exames: document.querySelector('[name="exames"]').value,
+    alteracaoExames: document.querySelector('[name="alteracaoExames"]').value,
+    medicamentos: document.querySelector('[name="medicamentos"]').value,
+    translucencia: document.querySelector('[name="translucencia"]').value,
+    vitaminas: document.querySelector('[name="vitaminas"]').value,
+    intercorrencias: document.querySelector('[name="intercorrencias"]').value,
+    aceitaContato: document.querySelector('[name="aceitaContato"]').value
+  };
+
+  await fetch(scriptURL, {
+    method: 'POST',
+    body: JSON.stringify(formData)
+  });
+
+  alert("Dados enviados com sucesso!");
 });
-
-});
-
-</script>
-
-</body>
-</html>
