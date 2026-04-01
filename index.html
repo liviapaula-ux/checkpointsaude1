@@ -167,32 +167,33 @@ button:hover {
 </div>
 
 <script>
-const scriptURL = 'https://script.google.com/macros/s/AKfycby-H95vstybCskfJ21JH0YIf7N4pQPBPSCLsvkvUxAORGgHon27zhCNJTnUplBAeJI/exec';
-
-document.getElementById('gestanteForm').addEventListener('submit', function(e) {
+document.getElementById('gestanteForm').addEventListener('submit', async function(e) {
   e.preventDefault();
 
   const formData = new FormData(this);
   const data = Object.fromEntries(formData.entries());
 
-  fetch(scriptURL, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    mode: 'no-cors'
-  })
-  .then(() => {
-    alert('Dados enviados com sucesso!');
-    this.reset();
-  })
-  .catch(error => {
+  try {
+    const response = await fetch('/api/save', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+      alert('Dados enviados com sucesso!');
+      this.reset();
+    } else {
+      alert('Erro ao enviar');
+    }
+
+  } catch (error) {
     console.error(error);
-    alert('Erro ao enviar os dados');
-  });
+    alert('Erro ao enviar');
+  }
 });
 </script>
-
 </body>
 </html>
