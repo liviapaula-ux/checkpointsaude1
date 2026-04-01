@@ -6,68 +6,74 @@
 <title>Checkpoint Saúde Gestante</title>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f7f9fc;
-    margin: 0;
-    padding: 40px;
+  font-family: Arial, sans-serif;
+  background: #f7f9fc;
+  margin: 0;
+  padding: 40px;
 }
 
 .container {
-    max-width: 900px;
-    margin: auto;
-    background: white;
-    padding: 30px;
-    border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  max-width: 950px;
+  margin: auto;
+  background: white;
+  padding: 32px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
 h1 {
-    text-align: center;
-    color: #4f46e5;
+  text-align: center;
+  color: #4f46e5;
+  margin-bottom: 30px;
 }
 
 .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 6px;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
 input, select, textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
 }
 
 textarea {
-    min-height: 80px;
-}
-
-button {
-    margin-top: 30px;
-    width: 100%;
-    padding: 14px;
-    background: #4f46e5;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #4338ca;
+  min-height: 90px;
 }
 
 .full {
-    grid-column: span 2;
+  grid-column: span 2;
+}
+
+button {
+  width: 100%;
+  margin-top: 30px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #4f46e5;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #4338ca;
 }
 </style>
 </head>
@@ -133,56 +139,6 @@ button:hover {
 <input type="text" name="tipoGestacao">
 </div>
 
-<div>
-<label>Tipo de Concepção</label>
-<input type="text" name="tipoConcepcao">
-</div>
-
-<div>
-<label>Gestação Planejada?</label>
-<select name="planejada">
-<option>Sim</option>
-<option>Não</option>
-</select>
-</div>
-
-<div>
-<label>Histórico de Aborto?</label>
-<select name="aborto">
-<option>Sim</option>
-<option>Não</option>
-</select>
-</div>
-
-<div>
-<label>Parto Prematuro?</label>
-<select name="partoPrematuro">
-<option>Sim</option>
-<option>Não</option>
-</select>
-</div>
-
-<div>
-<label>Má Formação?</label>
-<select name="maFormacao">
-<option>Sim</option>
-<option>Não</option>
-</select>
-</div>
-
-<div>
-<label>Óbito Fetal?</label>
-<select name="obitoFetal">
-<option>Sim</option>
-<option>Não</option>
-</select>
-</div>
-
-<div>
-<label>Tipo Sanguíneo</label>
-<input type="text" name="tipoSanguineo">
-</div>
-
 <div class="full">
 <label>Histórico Clínico</label>
 <textarea name="historicoClinico"></textarea>
@@ -194,41 +150,13 @@ button:hover {
 </div>
 
 <div class="full">
-<label>Exames</label>
-<textarea name="exames"></textarea>
-</div>
-
-<div class="full">
-<label>Alterações nos Exames</label>
-<textarea name="alteracaoExames"></textarea>
-</div>
-
-<div class="full">
 <label>Medicamentos</label>
 <textarea name="medicamentos"></textarea>
-</div>
-
-<div>
-<label>Translucência Nucal</label>
-<input type="text" name="translucencia">
-</div>
-
-<div>
-<label>Vitaminas</label>
-<input type="text" name="vitaminas">
 </div>
 
 <div class="full">
 <label>Intercorrências</label>
 <textarea name="intercorrencias"></textarea>
-</div>
-
-<div>
-<label>Aceita contato?</label>
-<select name="aceitaContato">
-<option>Sim</option>
-<option>Não</option>
-</select>
 </div>
 
 </div>
@@ -239,28 +167,30 @@ button:hover {
 </div>
 
 <script>
-const scriptURL = 'https://script.google.com/a/macros/ifood.com.br/s/AKfycby-H95vstybCskfJ21JH0YIf7N4pQPBPSCLsvkvUxAORGgHon27zhCNJTnUplBAeJI/exec';
+const scriptURL = 'https://script.google.com/macros/s/AKfycby-H95vstybCskfJ21JH0YIf7N4pQPBPSCLsvkvUxAORGgHon27zhCNJTnUplBAeJI/exec';
 
-document.getElementById('gestanteForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
+document.getElementById('gestanteForm').addEventListener('submit', function(e) {
+  e.preventDefault();
 
-    const form = new FormData(this);
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData.entries());
 
-    const data = Object.fromEntries(form.entries());
-
-    try {
-        await fetch(scriptURL, {
-            method: 'POST',
-            body: JSON.stringify(data)
-        });
-
-        alert('Dados enviados com sucesso!');
-        this.reset();
-
-    } catch (error) {
-        alert('Erro ao enviar dados.');
-        console.error(error);
-    }
+  fetch(scriptURL, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    mode: 'no-cors'
+  })
+  .then(() => {
+    alert('Dados enviados com sucesso!');
+    this.reset();
+  })
+  .catch(error => {
+    console.error(error);
+    alert('Erro ao enviar os dados');
+  });
 });
 </script>
 
